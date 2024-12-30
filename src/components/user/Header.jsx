@@ -7,7 +7,9 @@ function Header() {
     <>
       <div className="navbar flex justify-between items-center bg-base-100  h-20 shadow-2xl">
         <div className="flex-1">
-          <Link to={'/'} className="btn btn-ghost text-xl">EcommZ</Link>
+          <Link to={"/"} className="btn btn-ghost text-xl">
+            EcommZ
+          </Link>
         </div>
         <div className="flex justify-center items-center gap-6">
           <nav>

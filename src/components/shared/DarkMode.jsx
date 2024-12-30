@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 
 function DarkMode() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-    const [isDarkMode, setIsDarkMode] = useState(false)
-
-    document.querySelector("html").setAttribute("data-theme",isDarkMode ? "light" : "dark")
+  document
+    .querySelector("html")
+    .setAttribute("data-theme", isDarkMode ? "light" : "dark");
 
   return (
     <div>
       <label className="swap swap-rotate">
         {/* this hidden checkbox controls the state */}
-        <input type="checkbox" className="theme-controller" value="synthwave"  onClick={()=>setIsDarkMode(!isDarkMode)} />
+        <input
+          type="checkbox"
+          className="theme-controller"
+          value="synthwave"
+          onClick={() => setIsDarkMode(!isDarkMode)}
+        />
 
         {/* sun icon */}
         <svg

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
-import Cards from "../../components/user/Cards";
+
 import useFetch from "../../hooks/useFetch";
+import { Cards } from "../../components/user/Cards";
 
 function Products() {
   const [productList, isLoading, error] = useFetch("/product/allProducts");
+  
 
   return (
     <div>

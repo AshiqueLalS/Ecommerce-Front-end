@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import UserLayout from "../layout/UserLayout";
 import Home from "../pages/user/Home";
 import About from "../pages/user/About";
-import Register from "../pages/shared/Register";
 import Login from "../pages/shared/Login";
 import Contact from "../pages/user/Contact";
 import Products from "../pages/user/Products";
@@ -11,6 +10,7 @@ import ErrorPage from "../pages/shared/ErrorPage";
 import Cart from "../pages/user/Cart";
 import Profile from "../pages/user/Profile";
 import Signup from "../pages/shared/Signup";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
     {
@@ -21,10 +21,6 @@ export const router = createBrowserRouter([
         {
           path: "",
           element: <Home />
-        },
-        {
-          path: "register",
-          element: <Register />
         },
         {
           path: "login",
@@ -51,12 +47,16 @@ export const router = createBrowserRouter([
           element: <Signup />
         },
         {
-          // element: <ProtectedRoute />,
+          element: <ProtectedRoute />,
           path: "user",
           children: [
             {
               path: "profile",
               element: <Profile />
+            },
+            {
+              path: "cart",
+              element: <Cart />
             }
           ]
         }

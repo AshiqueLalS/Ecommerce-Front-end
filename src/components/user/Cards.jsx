@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/GlobalStyles.css";
 
-function Cards({ product }) {
+export const Cards=({ product })=> {
   return (
     <div className="product-card">
       <Link to={`/productDetails/${product?._id}`}>
@@ -24,4 +24,18 @@ function Cards({ product }) {
   );
 }
 
-export default Cards;
+export const CartCards = ({item, handleRemove}) =>{
+  return (
+    <div className="cart-item flex w-full h-32 items-center gap-20 bg-base-300 mb-10 rounded-md">
+      <img src={item?.productId?.image} alt="cart-item"  className="w-24 h-20"/>
+      <div>
+        <h1>{item?.productId?.title}</h1>
+        <h1>{item?.productId?.price}</h1>
+        <h1>{item?.quantity}</h1>
+      </div>
+      <button className="btn btn-secondary" onClick={()=>handleRemove(item?.productId?._id)}>Remove</button>
+    </div>
+  )
+}
+
+

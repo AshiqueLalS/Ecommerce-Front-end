@@ -3,8 +3,8 @@ import { axiosInstance } from "../config/axiosInstance";
 
 function useFetch(url) {
   const [data, setData] = useState();
-  const [error, setError] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProductList = async () => {
     try {
@@ -14,10 +14,10 @@ function useFetch(url) {
       });
 
       setData(response?.data?.data);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setError(error)
+      setError(error);
     }
   };
 
@@ -25,7 +25,7 @@ function useFetch(url) {
     fetchProductList();
   }, []);
 
-  return [data,isLoading,error];
+  return [data, isLoading, error];
 }
 
 export default useFetch;

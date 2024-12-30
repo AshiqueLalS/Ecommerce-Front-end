@@ -6,9 +6,17 @@ import App from './App'
 import "./index.css"
 import "./styles/GlobalStyles.css"
 import { router } from './routes/Router';
+import store from './redux/store'
+
+import { Provider } from 'react-redux';
+
 
 
 
 createRoot(document.getElementById('root')).render(
-  <RouterProvider router = {router}/>
+  <Provider store={store} >
+
+    <App />
+  </Provider>
+
 )

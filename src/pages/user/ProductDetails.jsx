@@ -2,15 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import useFetch from "../../hooks/useFetch";
+import toast from "react-hot-toast";
 
-function ProductDetails() {
+function ProductDetails({}) {
     const productId = useParams();
   
     const Id = productId?.id;
 
     const [productDetails, isLoading, error] = useFetch(`/product/productDetails/${Id}`)
 
-  
+    const handleAddToCart = async()=>{
+      try {
+        const response = await axiosInstance({
+          method: "POST",
+          url: "/carts/add-to-cart",
+          data: {productId:Id},
+        })
+      } catch (error) {
+        console.log(error)
+        toast.error("Add to cart failed")
+      }
+    }
+
+
+
 
   return (
     <div>
@@ -19,7 +34,7 @@ function ProductDetails() {
         <h1 className="product-title text-2xl">{productDetails?.title}</h1>
         <h3 className="text-success">${productDetails?.price}</h3>
         <p>{productDetails?.description}</p>
-        <button className="btn btn-primary ">Add to cart</button>
+        <button className="btn btn-primary " onClick={handleAddToCart}>Add to cart</button>
       </div>
     </div>
   );
