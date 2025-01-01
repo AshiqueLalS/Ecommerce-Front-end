@@ -16,8 +16,9 @@ function ProductDetails({}) {
         const response = await axiosInstance({
           method: "POST",
           url: "/carts/add-to-cart",
-          data: {productId:Id},
+          data: {productId:Id, quantity: 1},
         })
+        toast.success("Add to cart success")
       } catch (error) {
         console.log(error)
         toast.error("Add to cart failed")
