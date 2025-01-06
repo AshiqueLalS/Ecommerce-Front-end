@@ -25,7 +25,7 @@ function About() {
           </div>
         </section>
 
-        {/* Call to Action */}
+  
         <section className="bg-blue-600 text-white py-10 text-center">
           <h2 className="text-2xl font-bold">Join Our Journey</h2>
           <p className="mt-4">

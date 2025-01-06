@@ -5,6 +5,7 @@ import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 
 export const Cards = ({ product }) => {
+  var role =sessionStorage.getItem("role")
   const handleAddToCart = async () => {
     try {
       const response = await axiosInstance({
@@ -30,9 +31,14 @@ export const Cards = ({ product }) => {
         </Link>
         <p className="product-price text-success">${product?.price}</p>
         <div className="buttons-productlist">
-          <button className="btn btn-primary me-10" onClick={handleAddToCart}>
+          {role==="user"?
+          
+          <button className="btn btn-primary me-5" onClick={handleAddToCart}>
             Add to cart
           </button>
+          :
+          null
+          }
           <Link to={`/productDetails/${product?._id}`}>
             <button className="btn btn-warning ">Product Details</button>
           </Link>
@@ -88,7 +94,7 @@ export const CartCards = ({ item, handleRemove }) => {
         </div>
       </div>
       <button
-        className="btn btn-secondary"
+        className="btn btn-error"
         onClick={() => {
           handleRemove(item?.productId?._id)
           setQuantity(0)

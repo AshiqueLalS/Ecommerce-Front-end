@@ -11,6 +11,8 @@ import Cart from "../pages/user/Cart";
 import Profile from "../pages/user/Profile";
 import Signup from "../pages/shared/Signup";
 import ProtectedRoute from "./ProtectedRoute";
+import SellerProfile from "../pages/seller/SellerProfile";
+import AddProduct from "../pages/seller/AddProduct";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +27,10 @@ export const router = createBrowserRouter([
         {
           path: "login",
           element: <Login />
+        },
+        {
+          path: "seller-login",
+          element: <Login role="seller" />
         },
         {
           path: "contact",
@@ -47,6 +53,10 @@ export const router = createBrowserRouter([
           element: <Signup />
         },
         {
+          path: "seller-signup",
+          element: <Signup role="seller" />
+        },
+        {
           element: <ProtectedRoute />,
           path: "user",
           children: [
@@ -58,6 +68,21 @@ export const router = createBrowserRouter([
               path: "cart",
               element: <Cart />
             }
+          ]
+        },
+        {
+          element: <ProtectedRoute />,
+          path: "seller",
+          children: [
+            {
+              path: "seller-profile",
+              element: <SellerProfile />
+            },
+            {
+              path: "add-product",
+              element: <AddProduct />
+            },
+            
           ]
         }
       ]

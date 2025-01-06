@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser, saveUser } from "../redux/features/userSlice";
 
 function UserLayout() {
-  // const [isUserAuth, setIsUserAuth] = useState(false);
+
 
   const location = useLocation();
 
@@ -23,12 +23,12 @@ function UserLayout() {
         url: "/user/check-user",
       });
       dispatch(saveUser())
-      // setIsUserAuth(true);
+ 
       console.log(response, "===response");
     } catch (error) {
       console.log(error);
       dispatch(clearUser())
-      // setIsUserAuth(false);
+
     }
   };
 

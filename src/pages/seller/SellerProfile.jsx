@@ -1,24 +1,20 @@
 import React from 'react'
-import useFetch from '../../hooks/useFetch'
+import useFetch from '../../hooks/useFetch';
 
-function Profile() {
+function SellerProfile() {
 
-  const [profile, isLoading, error] = useFetch("/user/profile");
+    const [sellerProfile, isLoading, error] = useFetch("/seller/seller-profile");
 
 
   return (
-    <div><main className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+    <div>
+        <main className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
     <div className="bg-white rounded-lg shadow p-6">
    
       <div className="flex items-center space-x-6">
-        <img
-          src={profile?.image}
-          alt="Profile"
-          className="h-24 w-24 rounded-full border-2 border-blue-500"
-        />
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800">{profile?.name}</h2>
-          <p className="text-gray-500">{profile?.email}</p>
+          <h2 className="text-2xl font-semibold text-gray-800">{sellerProfile?.name}</h2>
+          <p className="text-gray-500">{sellerProfile?.email}</p>
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Edit Profile
           </button>
@@ -31,19 +27,13 @@ function Profile() {
         <div>
           <h3 className="text-xl font-semibold text-gray-700">Address Book</h3>
           <p className="text-gray-600 mt-2">
-            {profile?.address}
+            {sellerProfile?.address}
           </p>
           
         </div>
 
    
-        <div>
-          <h3 className="text-xl font-semibold text-gray-700">Saved Payment Methods</h3>
-          <p className="text-gray-600 mt-2">Visa **** 1234</p>
-          <button className="mt-2 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Add New Payment Method
-          </button>
-        </div>
+        
       </div>
 
  
@@ -61,10 +51,8 @@ function Profile() {
       </div> */}
     </div>
   </main>
-
-
-  </div>
+    </div>
   )
 }
 
-export default Profile
+export default SellerProfile

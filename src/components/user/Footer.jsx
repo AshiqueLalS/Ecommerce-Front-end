@@ -15,6 +15,9 @@ function Footer() {
           <Link to={"/review"}>
             <p className="link link-hover">Review</p>
           </Link>
+          <Link to={"/seller-login"}>
+            <p className="link link-hover">Seller login</p>
+          </Link>
         </nav>
         <aside>
           <p>

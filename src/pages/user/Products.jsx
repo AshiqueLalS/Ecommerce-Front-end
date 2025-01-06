@@ -22,9 +22,9 @@ function Products() {
           <div className="skeleton h-32 w-full"></div>
         </div>
       ) : (
-        <div>
+        <div className="container">
           <h1 className="text-3xl font-bold ">Product List</h1>
-          <div className="product-list">
+          <div className="product-list gap-5">
             {productList?.map((value) => (
               <Cards key={value._id} product={value} />
             ))}

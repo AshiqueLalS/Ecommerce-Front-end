@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 
-function Login(role = "user") {
+
+function Login({role = "user"}) {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -16,9 +17,14 @@ function Login(role = "user") {
   };
 
   if (role === "seller") {
-    (user.role = "seller"((user.login_api = "/seller/login"))),
-      (user.profile_route = "/seller/profile"),
-      (user.signup_route = "/seller/signup");
+    sessionStorage.setItem("role", "seller")
+    user.role = "seller"
+    user.login_api = "/seller/login"
+      user.profile_route = "/seller/seller-profile"
+      user.signup_route = "/seller/signup"
+  }
+  else{
+    sessionStorage.setItem("role", "user")
   }
 
   const onSubmit = async (data) => {
@@ -44,7 +50,7 @@ function Login(role = "user") {
       <div className="flex items-center justify-center min-h-screen ">
         <div className="w-full max-w-sm  rounded-lg shadow-2xl p-6">
           <h2 className="text-2xl font-semibold text-center">
-            Login to Your Account
+            {role==="seller"?"Login to your seller account":"Login to your account"}
           </h2>
           <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
@@ -81,7 +87,7 @@ function Login(role = "user") {
 
             <p className="mt-4 text-center text-sm ">
               Don't have an account?{" "}
-              <Link to={user.signup_route}>
+              <Link to={role==="seller"? "/seller-signup": user.signup_route}>
                 <button className="text-blue-600 hover:underline">
                   Sign Up
                 </button>

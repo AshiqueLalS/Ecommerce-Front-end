@@ -4,13 +4,13 @@ const ContactUs = () => {
   return (
     <div className="min-h-screen  flex items-center justify-center p-6">
       <div className="max-w-4xl w-full  shadow-lg rounded-lg p-8">
-        {/* Page Header */}
+      
         <h1 className="text-2xl font-semibold  mb-6">Contact Us</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
 
-          {/* Contact Information */}
+      
           <div>
             <h2 className="text-lg font-medium  mb-4">Get in Touch</h2>
             <p className=" mb-4">

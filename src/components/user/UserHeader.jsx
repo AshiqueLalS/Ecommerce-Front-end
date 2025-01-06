@@ -8,10 +8,14 @@ function UserHeader() {
   
   const navigate = useNavigate()
 
+  var role =sessionStorage.getItem("role")
+
+  
+
   const handleLogout = async () => {
     await axiosInstance({
       method: "GET",
-      url: "/user/logout",
+      url: role==="seller"? "/seller/sellerLogout":"/user/logout",
     })
     navigate("/login")
   }
@@ -39,25 +43,25 @@ function UserHeader() {
           </nav>
           <DarkMode />
           <div>
-            <Link to={"/user/cart"}>
-              <button className="btn btn-primary">Cart</button>
+            <Link to={role==="seller"?"/seller/add-product":"/user/cart"}>
+              <button className="btn btn-primary">{role==="seller"?"Add Product":"Cart"}</button>
             </Link>
           </div>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
-            <input
+            {/* <input
               type="text"
               placeholder="Filter"
               className="input input-bordered w-24 md:w-auto"
-            />
+            /> */}
           </div>
 
           <div className="dropdown dropdown-end">
             <div className="avatar">
               <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-1">
                 <button>
-                  <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" />
+                  <img src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg" />
                 </button>
               </div>
             </div>
@@ -66,7 +70,7 @@ function UserHeader() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to={"/user/profile"}>
+                <Link to={role==="seller"?"/seller/seller-profile":"/user/profile"}>
                   <a className="justify-between">Profile</a>
                 </Link>
               </li>
