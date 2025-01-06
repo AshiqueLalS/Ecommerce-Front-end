@@ -17,6 +17,7 @@ function UserHeader() {
       method: "GET",
       url: role==="seller"? "/seller/sellerLogout":"/user/logout",
     })
+    localStorage.clear();
     navigate("/login")
   }
   return (
