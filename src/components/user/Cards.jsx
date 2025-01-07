@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import "../../styles/GlobalStyles.css";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export const Cards = ({ product }) => {
-  var role =sessionStorage.getItem("role")
+  const {userData} = useSelector(state=>state.user)
+
+  const role = userData?.role
+  
   const handleAddToCart = async () => {
     try {
       const response = await axiosInstance({
@@ -60,6 +64,8 @@ export const CartCards = ({ item, handleRemove }) => {
         data: { productId: item?.productId?._id, quantity: -1 },
       });
       setQuantity((prevQty)=>prevQty-1)
+      
+  
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +78,7 @@ export const CartCards = ({ item, handleRemove }) => {
         data: { productId: item?.productId?._id, quantity: 1 },
       });
       setQuantity(quantity+1)
+    
     } catch (error) {
       console.log(error);
     }

@@ -3,10 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import useFetch from "../../hooks/useFetch";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function ProductDetails({}) {
     const productId = useParams();
-    var role =sessionStorage.getItem("role")
+    const {userData} = useSelector(state=>state.user)
+
+    const role = userData?.role
+
   
     const Id = productId?.id;
 

@@ -3,23 +3,32 @@ import { Link, useNavigate } from "react-router-dom";
 import DarkMode from "../shared/DarkMode";
 import axios from "axios";
 import { axiosInstance } from "../../config/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser, saveUser } from "../../redux/features/userSlice";
 
 function UserHeader() {
   
-  const navigate = useNavigate()
-
-  var role =sessionStorage.getItem("role")
-
   
 
+
+const state = useSelector(state=>state.user)
+  const dispatch = useDispatch()
+  const role = state?.userData?.role
+
+  console.log(state);
+  
   const handleLogout = async () => {
-    await axiosInstance({
-      method: "GET",
-      url: role==="seller"? "/seller/sellerLogout":"/user/logout",
-    })
-    role=null;
-    console.log(role,"======role")
-    navigate("/login")
+    try {
+      await axiosInstance({
+        method: "GET",
+        url: role==="seller"? "/seller/sellerLogout":"/user/logout",
+      })
+      dispatch(clearUser())
+      // navigate("/login")
+    } catch (error) {
+      console.log(error.message);
+      
+    }
   }
   return (
     <>

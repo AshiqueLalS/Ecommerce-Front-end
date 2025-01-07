@@ -6,8 +6,7 @@ import toast from 'react-hot-toast';
 
 function AddProduct() {
 
-    // var role =sessionStorage.getItem("role")
-     const { register, handleSubmit } = useForm();
+     const { register, handleSubmit, reset } = useForm();
      const navigate = useNavigate();
 
       const [loading, setLoading] = useState(false)
@@ -28,7 +27,7 @@ function AddProduct() {
 
     })
     toast.success("Product created successfully");
-     navigate("/products")
+  reset()
     
    } catch (error) {
     console.log(error);

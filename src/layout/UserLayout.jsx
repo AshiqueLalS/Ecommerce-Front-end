@@ -12,9 +12,11 @@ function UserLayout() {
 
   const location = useLocation();
 
-  const {isUserAuth} = useSelector((state) => state.user)
+  const {isUserAuth, userData} = useSelector((state) => state.user)
 
   const dispatch= useDispatch()
+  console.log({userData});
+  
 
   const checkUser = async () => {
     try {
@@ -22,7 +24,10 @@ function UserLayout() {
         method: "GET",
         url: "/user/check-user",
       });
-      dispatch(saveUser())
+    
+
+      dispatch(saveUser(response?.data?.data))
+  
  
       console.log(response, "===response");
     } catch (error) {

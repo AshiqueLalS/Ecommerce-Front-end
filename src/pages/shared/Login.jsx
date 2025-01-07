@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { saveUser } from "../../redux/features/userSlice";
 
 
 function Login({role = "user"}) {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const user = {
     role: "user",
@@ -17,15 +20,13 @@ function Login({role = "user"}) {
   };
 
   if (role === "seller") {
-    sessionStorage.setItem("role", "seller")
+
     user.role = "seller"
     user.login_api = "/seller/login"
       user.profile_route = "/seller/seller-profile"
       user.signup_route = "/seller/signup"
   }
-  else{
-    sessionStorage.setItem("role", "user")
-  }
+  
 
   const onSubmit = async (data) => {
     try {
@@ -38,6 +39,7 @@ function Login({role = "user"}) {
       });
       console.log(response, "===response");
       toast.success("Log-in Successful");
+      dispatch(saveUser(response?.data?.data))
       navigate(user.profile_route);
     } catch (error) {
       toast.error("Log-in failed");
