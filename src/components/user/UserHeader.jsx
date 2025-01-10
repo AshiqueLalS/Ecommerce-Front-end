@@ -7,29 +7,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser, saveUser } from "../../redux/features/userSlice";
 
 function UserHeader() {
-  
-  
-
-
-const state = useSelector(state=>state.user)
-  const dispatch = useDispatch()
-  const role = state?.userData?.role
+  const state = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const role = state?.userData?.role;
 
   console.log(state);
-  
+
   const handleLogout = async () => {
     try {
       await axiosInstance({
         method: "GET",
-        url: role==="seller"? "/seller/sellerLogout":"/user/logout",
-      })
-      dispatch(clearUser())
+        url: role === "seller" ? "/seller/sellerLogout" : "/user/logout",
+      });
+      dispatch(clearUser());
       // navigate("/login")
     } catch (error) {
       console.log(error.message);
-      
     }
-  }
+  };
   return (
     <>
       <div className="navbar bg-base-100 gap-6 h-20 shadow-2xl">
@@ -54,8 +49,10 @@ const state = useSelector(state=>state.user)
           </nav>
           <DarkMode />
           <div>
-            <Link to={role==="seller"?"/seller/add-product":"/user/cart"}>
-              <button className="btn btn-primary">{role==="seller"?"Add Product":"Cart"}</button>
+            <Link to={role === "seller" ? "/seller/add-product" : "/user/cart"}>
+              <button className="btn btn-primary">
+                {role === "seller" ? "Add Product" : "Cart"}
+              </button>
             </Link>
           </div>
         </div>
@@ -81,7 +78,13 @@ const state = useSelector(state=>state.user)
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to={role==="seller"?"/seller/seller-profile":"/user/profile"}>
+                <Link
+                  to={
+                    role === "seller"
+                      ? "/seller/seller-profile"
+                      : "/user/profile"
+                  }
+                >
                   <a className="justify-between">Profile</a>
                 </Link>
               </li>

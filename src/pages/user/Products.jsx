@@ -6,7 +6,6 @@ import { Cards } from "../../components/user/Cards";
 
 function Products() {
   const [productList, isLoading, error] = useFetch("/product/allProducts");
-  
 
   return (
     <div>

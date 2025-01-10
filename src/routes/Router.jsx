@@ -13,6 +13,7 @@ import Signup from "../pages/shared/Signup";
 import ProtectedRoute from "./ProtectedRoute";
 import SellerProfile from "../pages/seller/SellerProfile";
 import AddProduct from "../pages/seller/AddProduct";
+import PaymentSuccess from "../pages/user/PaymentSuccess";
 
 export const router = createBrowserRouter([
     {
@@ -67,7 +68,11 @@ export const router = createBrowserRouter([
             {
               path: "cart",
               element: <Cart />
-            }
+            },
+            {
+              path: "payment/success",
+              element: <PaymentSuccess />
+            },
           ]
         },
         {

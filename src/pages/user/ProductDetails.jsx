@@ -6,48 +6,49 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 function ProductDetails({}) {
-    const productId = useParams();
-    const {userData} = useSelector(state=>state.user)
+  const productId = useParams();
+  const { userData } = useSelector((state) => state.user);
 
-    const role = userData?.role
+  const role = userData?.role;
 
-  
-    const Id = productId?.id;
+  const Id = productId?.id;
 
-    const [productDetails, isLoading, error] = useFetch(`/product/productDetails/${Id}`)
+  const [productDetails, isLoading, error] = useFetch(
+    `/product/productDetails/${Id}`
+  );
 
-    const handleAddToCart = async()=>{
-      try {
-        const response = await axiosInstance({
-          method: "POST",
-          url: "/carts/add-to-cart",
-          data: {productId:Id, quantity: 1},
-        })
-        toast.success("Add to cart success")
-      } catch (error) {
-        console.log(error)
-        toast.error("Add to cart failed")
-      }
+  const handleAddToCart = async () => {
+    try {
+      const response = await axiosInstance({
+        method: "POST",
+        url: "/carts/add-to-cart",
+        data: { productId: Id, quantity: 1 },
+      });
+      toast.success("Add to cart success");
+    } catch (error) {
+      console.log(error);
+      toast.error("Add to cart failed");
     }
-
-
-
+  };
 
   return (
     <div>
       <div className="product-details">
         <img src={productDetails?.image} alt="product" />
         <h1 className="product-title text-2xl">{productDetails?.title}</h1>
-        <h3 className="text-success">${productDetails?.price}</h3>
+        <h3 className="text-success ">
+          <del>&#2352;</del> {productDetails?.price}{" "}
+        </h3>
         <p>{productDetails?.description}</p>
-        {role==="user"?
-       
-        <button className="btn btn-primary " onClick={handleAddToCart}>Add to cart</button>
-        :
-        <Link to="/products">
-        <button className="btn btn-primary" > Go Back</button>
-        </Link>
-      }
+        {role === "user" ? (
+          <button className="btn btn-primary " onClick={handleAddToCart}>
+            Add to cart
+          </button>
+        ) : (
+          <Link to="/products">
+            <button className="btn btn-primary"> Go Back</button>
+          </Link>
+        )}
       </div>
     </div>
   );

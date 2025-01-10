@@ -8,15 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser, saveUser } from "../redux/features/userSlice";
 
 function UserLayout() {
-
-
   const location = useLocation();
 
-  const {isUserAuth, userData} = useSelector((state) => state.user)
+  const { isUserAuth, userData } = useSelector((state) => state.user);
 
-  const dispatch= useDispatch()
-  console.log({userData});
-  
+  const dispatch = useDispatch();
+  console.log({ userData });
 
   const checkUser = async () => {
     try {
@@ -24,16 +21,13 @@ function UserLayout() {
         method: "GET",
         url: "/user/check-user",
       });
-    
 
-      dispatch(saveUser(response?.data?.data))
-  
- 
+      dispatch(saveUser(response?.data?.data));
+
       console.log(response, "===response");
     } catch (error) {
       console.log(error);
-      dispatch(clearUser())
-
+      dispatch(clearUser());
     }
   };
 
