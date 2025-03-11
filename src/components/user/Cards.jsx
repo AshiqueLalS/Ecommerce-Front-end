@@ -33,7 +33,9 @@ export const Cards = ({ product }) => {
         <Link to={`/productDetails/${product?._id}`}>
           <h2 className="product-title text-lg">{product?.title}</h2>
         </Link>
-        <p className="product-price text-success"><del>&#2352;</del> {product?.price}</p>
+        <p className="product-price text-success">
+          <del>&#2352;</del> {product?.price}
+        </p>
         <div className="buttons-productlist">
           {role === "user" ? (
             <button className="btn btn-primary me-5" onClick={handleAddToCart}>
@@ -50,31 +52,43 @@ export const Cards = ({ product }) => {
 };
 
 export const CartCards = ({ item, handleRemove, setCartItems }) => {
-  console.log({item});
-  
-
+  console.log({ item });
   const decrementQuantity = async () => {
-    setCartItems((prevCartItems)=>prevCartItems.map(cartItem=>cartItem._id===item?._id?{...cartItem, quantity: cartItem.quantity-1}:cartItem))
+    // setCartItems((prevCartItems) =>
+    //   prevCartItems.map((cartItem) =>
+    //     cartItem._id === item?._id
+    //       ? { ...cartItem, quantity: cartItem.quantity - 1 }
+    //       : cartItem
+    //   )
+    // );
     try {
-      const response = await axiosInstance({
-        method: "POST",
-        url: "/carts/add-to-cart",
-        data: { productId: item?.productId?._id, quantity: -1 },
-      });
-      
+      if (item?.quantity === 1) {
+        document.getElementById("my_modal_2").showModal();
+      } else {
+        const response = await axiosInstance({
+          method: "POST",
+          url: "/carts/add-to-cart",
+          data: { productId: item?.productId?._id, quantity: -1 },
+        });
+      }
     } catch (error) {
       console.log(error);
     }
   };
   const incrementQuantity = async () => {
     try {
-      setCartItems((prevCartItems)=>prevCartItems.map(cartItem=>cartItem?._id===item?._id?{...cartItem, quantity: cartItem.quantity+1}:cartItem))
+      setCartItems((prevCartItems) =>
+        prevCartItems.map((cartItem) =>
+          cartItem?._id === item?._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
       const response = await axiosInstance({
         method: "POST",
         url: "/carts/add-to-cart",
         data: { productId: item?.productId?._id, quantity: 1 },
       });
-     
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +100,28 @@ export const CartCards = ({ item, handleRemove, setCartItems }) => {
 
   return (
     <div className="cart-item flex w-full h-32 items-center gap-20 bg-base-300 mb-10 rounded-md">
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
+            Remove {item.productId?.title} ?
+          </h3>
+          <div className="flex items-center justify-between">
+            <p className="py-4">Do you want to remove this product</p>
+            <div className="flex gap-1 ">
+              <form method="dialog">
+                <button className="btn" onClick={() => handleRemove(item._id)}>
+                  Yes
+                </button>
+              </form>
+              <form method="dialog">
+                <button className="btn" onClick={() => console.log("no")}>
+                  No
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </dialog>
       <img src={item?.productId?.image} alt="cart-item" className="w-24 h-20" />
       <div className="cart-item2">
         <h1>{item?.productId?.title}</h1>
@@ -104,7 +140,6 @@ export const CartCards = ({ item, handleRemove, setCartItems }) => {
         className="btn btn-error"
         onClick={() => {
           handleRemove(item?.productId?._id);
-        
         }}
       >
         Remove

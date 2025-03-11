@@ -25,7 +25,7 @@ function useFetch(url) {
     fetchProductList();
   }, []);
 
-  return [data, isLoading, error];
+  return [data, isLoading, error, fetchProductList];
 }
 
 export default useFetch;

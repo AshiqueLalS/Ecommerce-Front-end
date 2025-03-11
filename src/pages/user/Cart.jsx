@@ -5,25 +5,31 @@ import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 function Cart() {
-  const [cartDetails, isLoading, error] = useFetch("/carts/get-cart-details");
-  
-  const [cartItems, setCartItems] = useState([])
+  const [cartDetails, isLoading, error, refetch] = useFetch(
+    "/carts/get-cart-details"
+  );
 
-  console.log({cartItems,cartDetails});
-  
-  
+  const [cartItems, setCartItems] = useState([]);
 
-  const totalPrice = cartItems.reduce((acc, item)=>acc += item?.price*item?.quantity,0)
-  
+  console.log({ cartItems, cartDetails });
+
+  const totalPrice = cartItems.reduce(
+    (acc, item) => (acc += item?.price * item?.quantity),
+    0
+  );
+
   console.log(totalPrice);
-  
-
-  useEffect(() => {
-    setCartItems(cartDetails?.products||[]);
-  }, [cartDetails]);
 
   const handleRemoveProduct = async (productId) => {
-    setCartItems((prevCartItems)=>prevCartItems.map(item=>item._id===productId?{...item, quantity: 0}:item))
+    setCartItems((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item._id === productId ? { ...item, quantity: 0 } : item
+      )
+    );
+
+    // setCartItems((prevCartItems) =>
+    //   prevCartItems.filter((item) => item._id !== productId)
+    // );
     try {
       const response = await axiosInstance({
         method: "DELETE",
@@ -32,10 +38,15 @@ function Cart() {
       });
 
       toast.success("product removed successfully");
+      await refetch();
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    setCartItems(cartDetails?.products || []);
+  }, [cartDetails]);
 
   const makePayment = async () => {
     try {
@@ -63,8 +74,6 @@ function Cart() {
     }
   };
 
-  
-
   const handlePaymentSuccess = async () => {
     try {
       await axiosInstance({
@@ -73,7 +82,6 @@ function Cart() {
       });
 
       setCartItems([]); // Clear cart on frontend
-      toast.success("Cart cleared successfully after payment!");
     } catch (err) {
       console.error("Error clearing cart:", err);
       toast.error("Failed to clear cart.");

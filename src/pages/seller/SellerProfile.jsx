@@ -35,7 +35,7 @@ function SellerProfile() {
             className="btn btn-accent mt-4"
             onClick={() => setShowOrder(!showOrder)}
           >
-            My Orders
+             Orders
           </button>
 
           {showOrder && <Order role="seller"/>}
