@@ -60,7 +60,7 @@ function Cart() {
         data: { products: cartDetails?.products },
       });
       console.log(session, "===session");
-      const result = stripe.redirectToCheckout({
+      const result = await stripe.redirectToCheckout({
         sessionId: session.data.sessionId,
       });
 

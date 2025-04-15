@@ -54,17 +54,18 @@ export const Cards = ({ product }) => {
 export const CartCards = ({ item, handleRemove, setCartItems }) => {
   console.log({ item });
   const decrementQuantity = async () => {
-    // setCartItems((prevCartItems) =>
-    //   prevCartItems.map((cartItem) =>
-    //     cartItem._id === item?._id
-    //       ? { ...cartItem, quantity: cartItem.quantity - 1 }
-    //       : cartItem
-    //   )
-    // );
+    
     try {
       if (item?.quantity === 1) {
         document.getElementById("my_modal_2").showModal();
       } else {
+        setCartItems((prevCartItems) =>
+          prevCartItems.map((cartItem) =>
+            cartItem._id === item?._id
+              ? { ...cartItem, quantity: cartItem.quantity - 1 }
+              : cartItem
+          )
+        );
         const response = await axiosInstance({
           method: "POST",
           url: "/carts/add-to-cart",
@@ -109,7 +110,7 @@ export const CartCards = ({ item, handleRemove, setCartItems }) => {
             <p className="py-4">Do you want to remove this product</p>
             <div className="flex gap-1 ">
               <form method="dialog">
-                <button className="btn" onClick={() => handleRemove(item._id)}>
+                <button className="btn" onClick={() => handleRemove(item?.productId?._id)}>
                   Yes
                 </button>
               </form>
