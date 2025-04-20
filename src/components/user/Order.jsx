@@ -12,6 +12,7 @@ function Order({ role }) {
   console.log({ orderDetails });
   console.log({ sellerOrderDetails });
   console.log({ userDetails });
+  
 
   //   const [orderStatus, setOrderStatus] = useState(sellerOrderDetails.orderStatus); // State to manage the dropdown value
 
@@ -42,12 +43,12 @@ function Order({ role }) {
   };
   const orderDetailByRole =
     role === "seller" ? sellerOrderDetails : orderDetails;
-
-  const fetchProductDetails = async (id) => {
-    const res = await fetch("/productDetails/" + id);
-    const resJson = await res.json();
-    return resJson;
-  };
+    console.log({ orderDetailByRole })
+  // const fetchProductDetails = async (id) => {
+  //   const res = await fetch("/productDetails/" + id);
+  //   const resJson = await res.json();
+  //   return resJson;
+  // };
   return (
     <div className="mt-8">
       <h3 className="text-xl font-semibold text-gray-600">Order History</h3>
@@ -60,9 +61,9 @@ function Order({ role }) {
             >
               <div className="flex justify-between ">
                 <p className="text-gray-600">Order #{orderDetailsByRole._id}</p>
-                {orderDetailByRole.products.map((product) => (
+                {/* {orderDetailByRole.products.map((product) => (
                   <span>{fetchProductDetails(id).title}</span>
-                ))}
+                ))} */}
                 {userDetails.map(
                   (user) =>
                     orderDetailsByRole.userId === user._id && (
