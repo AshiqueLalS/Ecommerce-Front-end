@@ -12,9 +12,9 @@ function Footer() {
           <Link to={"/contact"}>
             <p className="link link-hover">Contact</p>
           </Link>
-          <Link to={"/review"}>
+          {/* <Link to={"/review"}>
             <p className="link link-hover">Review</p>
-          </Link>
+          </Link> */}
           <Link to={"/seller-login"}>
             <p className="link link-hover">Seller login</p>
           </Link>

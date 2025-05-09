@@ -19,7 +19,7 @@ function AddProduct() {
     console.log(requestBody);
 
     try {
-      const response = axiosInstance({
+      const response = await axiosInstance({
         method: "POST",
         url: "/product/create-product",
         data: requestBody,
@@ -39,7 +39,6 @@ function AddProduct() {
         <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold  mb-6">Add a Product</h1>
 
-         
           <form
             className=" p-6 rounded-lg shadow-2xl"
             onSubmit={handleSubmit(onSubmit)}
